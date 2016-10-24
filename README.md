@@ -1,0 +1,2 @@
+# foo
+A test repository
