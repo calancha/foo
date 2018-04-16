@@ -7,4 +7,4 @@
     type: "RUN_DOCKER_CONTAINER"
     docker_image_name: "samueldebruyn/debian-git"
     docker_image_tag: "latest"
-    inline_commands: "apt-get update && apt-get install -y ruby && git clone https://github.com/rejeep/evm.git"
+    inline_commands: "apt-get update && apt-get install -y ruby && git clone https://github.com/rejeep/evm.git && echo $PWD && ls -ltra"
