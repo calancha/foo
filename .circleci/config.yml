@@ -5,9 +5,8 @@ jobs:
       - image: samueldebruyn/debian-git
     environment:
       EVM_EMACS: "emacs-24.4-travis"
-      EMACS: /tmp/$EVM_EMACS/bin/emacs
       LOAD: "-l do_not_delete.el -l test-suite.el"
-      EVM: $HOME/.evm/bin/evm
+      EVM: "/root/.evm/bin/evm"
     steps:
       - checkout
       - run:
@@ -18,7 +17,7 @@ jobs:
           command: git clone https://github.com/rejeep/evm.git $HOME/.evm
       - run:
           name: Config Emacs
-          command: $HOME/.evm/bin/evm config path /tmp
+          command: $EVM config path /tmp
       - run:
           name: Show EVM path
           command: ls -ltr $EVM
@@ -27,4 +26,4 @@ jobs:
           command: $EVM config path /tmp && $EVM install $EVM_EMACS --use --skip
       - run:
           name: Run test suite
-          command: $EMACS -batch $LOAD -f ert-run-tests-batch-and-exit
+          command: emacs -batch $LOAD -f ert-run-tests-batch-and-exit
