@@ -2,12 +2,29 @@ version: 2
 jobs:
   build:
     docker:
-      - image: debian:stretch
+      - image: samueldebruyn/debian-git
+    environment:
+      EVM_EMACS: "emacs-24.4-travis"
+      LOAD: "-l do_not_delete.el -l test-suite.el"
+      EVM: "/root/.evm/bin/evm"
+      EMACS: "/root/.evm/bin/emacs"
     steps:
       - checkout
       - run:
-          name: Greeting
-          command: echo Hello, world.
+          name: Install Ruby
+          command: apt-get update && apt-get install -y ruby
+      - run:
+          name: checkout Emacs
+          command: git clone https://github.com/rejeep/evm.git $HOME/.evm
+      - run:
+          name: Config Emacs
+          command: $EVM config path /tmp
+      - run:
+          name: Show EVM path
+          command: ls -ltr $EVM
+      - run:
+          name: Install Emacs
+          command: $EVM config path /tmp && $EVM install $EVM_EMACS --use --skip
       - run:
           name: Run test suite
-          command: emacs -batch -l do_not_delete.el -l test-suite.el -f ert-run-tests-batch-and-exit
+          command: $EMACS -batch $LOAD -f ert-run-tests-batch-and-exit
