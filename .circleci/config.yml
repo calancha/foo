@@ -3,11 +3,22 @@ jobs:
   build:
     docker:
       - image: debian:stretch
+    environment:
+      EVM_EMACS: "emacs-24.4-travis"
     steps:
       - checkout
       - run:
           name: Greeting
           command: echo Hello, world.
+      - run:
+          name: checkout Emacs
+          command: git clone https://github.com/rejeep/evm.git $HOME/.evm
+      - run:
+          name: Config env path
+          command: $HOME/.env/bin/evm config path /tmp
+      - run:
+          name: Install Emacs
+          command: $HOME/.env/bin/evm install $EVM_EMACS -use --skip
       - run:
           name: Run test suite
           command: emacs -batch -l do_not_delete.el -l test-suite.el -f ert-run-tests-batch-and-exit
