@@ -11,6 +11,9 @@ jobs:
           name: Greeting
           command: echo Hello, world.
       - run:
+          name: Install Ruby
+          command: apt-get update && apt-get install -y ruby
+      - run:
           name: checkout Emacs
           command: git clone https://github.com/rejeep/evm.git $HOME/.evm
       - run:
