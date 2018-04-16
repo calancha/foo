@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: debian:stretch
+    steps:
+      - checkout
+      - run:
+          name: Greeting
+          command: echo Hello, world.
+      - run:
+          name: Run test suite
+          command: emacs -batch -l do_not_delete.el -l test-suite.el -f ert-run-tests-batch-and-exit
