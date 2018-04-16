@@ -1,0 +1,15 @@
+- pipeline: "production"
+  trigger_mode: "ON_EVERY_PUSH"
+  ref_type: "BRANCH"
+  ref_name: "master"
+  actions:
+  - action: "Build container"
+    type: "BUILD"
+    docker_image_name: "samueldebruyn/debian-git"
+    setup_commands:
+    - "apt-get update && apt-get install -y ruby"
+    - "git clone https://github.com/rejeep/evm.git /root/.evm"
+    - "/root/.evm/bin/evm config path /tmp"
+    - "/root/.evm/bin/evm config path /tmp && /root/.evm/bin/evm install emacs-24.4-travis --use --skip"
+    execute_commands:
+    - "/root/.evm/bin/emacs -batch $LOAD -f ert-run-tests-batch-and-exit"
