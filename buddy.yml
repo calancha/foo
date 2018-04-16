@@ -7,7 +7,4 @@
     type: "RUN_DOCKER_CONTAINER"
     docker_image_name: "samueldebruyn/debian-git"
     docker_image_tag: "latest"
-    inline_commands: "apt-get update && apt-get install -y ruby && git clone https://github.com/rejeep/evm.git"
-    inline_commands: "/root/.evm/bin/evm config path /tmp"
-    inline_commands: "/root/.evm/bin/evm install emacs-24.4-travis --use --skip"
-    inline_commands: "/root/.evm/bin/emacs -batch $LOAD -f ert-run-tests-batch-and-exit"
+    inline_commands: "apt-get update && apt-get install -y ruby && git clone https://github.com/rejeep/evm.git && /root/.evm/bin/evm config path /tmp && /root/.evm/bin/evm install emacs-24.4-travis --use --skip && /root/.evm/bin/emacs -batch $LOAD -f ert-run-tests-batch-and-exit"
