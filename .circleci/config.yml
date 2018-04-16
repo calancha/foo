@@ -18,7 +18,7 @@ jobs:
           command: git clone https://github.com/rejeep/evm.git $HOME/.evm
       - run:
           name: Config env path
-          command: $HOME/.env/bin/evm config path /tmp
+          command: $HOME/.evm/bin/evm config path /tmp
       - run:
           name: Install Emacs
           command: $HOME/.env/bin/evm install $EVM_EMACS -use --skip
