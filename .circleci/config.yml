@@ -5,6 +5,7 @@ jobs:
       - image: samueldebruyn/debian-git
     environment:
       EVM_EMACS: "emacs-24.4-travis"
+      EMACS: "/tmp/$EVM_EMACS/bin/emacs"
     steps:
       - checkout
       - run:
@@ -24,7 +25,7 @@ jobs:
           command: $HOME/.evm/bin/evm install $EVM_EMACS --use --skip
       - run:
           name: Show path for Emacs instalation
-          command: ls -ltr /tmp
+          command: echo $EMACS
       - run:
           name: Run test suite
-          command: emacs -batch -l do_not_delete.el -l test-suite.el -f ert-run-tests-batch-and-exit
+          command: /tmp/$EVM_EMACS/bin/emacs -batch -l do_not_delete.el -l test-suite.el -f ert-run-tests-batch-and-exit
