@@ -27,4 +27,4 @@ jobs:
           command: $EVM config path /tmp && $EVM install $EVM_EMACS --use --skip
       - run:
           name: Run test suite
-          command: emacs -batch $LOAD -f ert-run-tests-batch-and-exit
+          command: $EMACS -batch $LOAD -f ert-run-tests-batch-and-exit
