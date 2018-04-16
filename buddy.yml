@@ -6,6 +6,7 @@
   - action: "Build container"
     type: "BUILD"
     docker_image_name: "samueldebruyn/debian-git"
+    docker_tag_name: ""
     setup_commands:
     - "apt-get update && apt-get install -y ruby"
     - "git clone https://github.com/rejeep/evm.git /root/.evm"
