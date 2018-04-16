@@ -7,7 +7,7 @@ jobs:
       EVM_EMACS: "emacs-24.4-travis"
       EMACS: "/tmp/$EVM_EMACS/bin/emacs"
       LOAD: "-l do_not_delete.el -l test-suite.el"
-      EVM: "$HOME/.evm/bin/evm"
+      EVM: "/root/.evm/bin/evm"
     steps:
       - checkout
       - run:
@@ -19,6 +19,9 @@ jobs:
       - run:
           name: Config Emacs
           command: $HOME/.evm/bin/evm config path /tmp
+      - run:
+          name: Show EVM path
+          command: ls -ltr $EVM
       - run:
           name: Install Emacs
           command: $EVM config path /tmp && $EVM install $EVM_EMACS --use --skip
