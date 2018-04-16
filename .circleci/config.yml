@@ -5,9 +5,9 @@ jobs:
       - image: samueldebruyn/debian-git
     environment:
       EVM_EMACS: "emacs-24.4-travis"
-      EMACS: "/tmp/$EVM_EMACS/bin/emacs"
+      EMACS: /tmp/$EVM_EMACS/bin/emacs
       LOAD: "-l do_not_delete.el -l test-suite.el"
-      EVM: "/root/.evm/bin/evm"
+      EVM: $HOME/.evm/bin/evm
     steps:
       - checkout
       - run:
